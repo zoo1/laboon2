@@ -20,7 +20,38 @@ public class HandTest {
         Assert.assertNotNull(hand);
     }
     
+    @Test
     public void testAddCard(){
+        
+    }
+    
+    @Test
+    public void testRemoveCard(){
+        
+    }
+    
+    @Test
+    public void testClear(){
+        
+    }
+    
+    @Test
+    public void testGetCard(){
+        
+    }
+    
+    @Test
+    public void testGetCardCount(){
+        
+    }
+    
+    @Test
+    public void testSortBySuit(){
+        
+    }
+    
+    @Test
+    public void testSortByValue(){
         
     }
     
