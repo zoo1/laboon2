@@ -7,6 +7,21 @@
  *
  * @author Nate Eilert
  */
+
+import static org.mockito.Mockito.*;
+import junit.framework.Assert;
+import org.junit.Test;
+
 public class HandTest {
+    
+    @Test
+    public void testConstructor(){
+        Hand hand = new Hand();
+        Assert.assertNotNull(hand);
+    }
+    
+    public void testAddCard(){
+        
+    }
     
 }
