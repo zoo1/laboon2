@@ -26,10 +26,10 @@ Deck _deck = null;
 			String temp=_deck.dealCard().toString();
 			for(int j=i; j>0;j--)
 			{
-				if(temp.equals(cards[j-1])
+				if(temp.equals(cards[j-1]))
 					contain=true;
 			}
-			card[i]=temp;
+			cards[i]=temp;
 		}
 		assertFalse(contain);
 	}
@@ -47,12 +47,12 @@ Deck _deck = null;
 @Test
 	public void testUniqueDecks() {
 		_deck = new Deck();
-		_deck2 = new Deck();
+		Deck _deck2 = new Deck();
 		_deck2.shuffle();
 		boolean allequal=true;
 		for(int i=0;i<52;i++)
 		{
-			if(!(_deck.dealCard().toString().equals(_deck2.dealCard().toString())
+			if(!(_deck.dealCard().toString()).equals(_deck2.dealCard().toString()))
 				allequal=false;
 		}
 		assertFalse(allequal);

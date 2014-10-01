@@ -6,39 +6,40 @@
     hand in the game of Blackjack.
 */
 
-import java.util.Vector;
+import java.util.ArrayList;
+
 
 public class Hand {
 
-   private Vector hand;   // The cards in the hand.
+   private ArrayList hand;   // The cards in the hand.
    
    public Hand() {
            // Create a Hand object that is initially empty.
-      hand = new Vector();
+      hand = new ArrayList();
    }
    
    public void clear() {
          // Discard all the cards from the hand.
-      hand.removeAllElements();
+      hand.clear();
    }
    
    public void addCard(Card c) {
          // Add the card c to the hand.  c should be non-null.  (If c is
          // null, nothing is added to the hand.)
       if (c != null)
-         hand.addElement(c);
+         hand.add(c);
    }
    
    public void removeCard(Card c) {
          // If the specified card is in the hand, it is removed.
-      hand.removeElement(c);
+      hand.remove(c);
    }
    
    public void removeCard(int position) {
          // If the specified position is a valid position in the hand,
          // then the card in that position is removed.
       if (position >= 0 && position < hand.size())
-         hand.removeElementAt(position);
+         hand.remove(position);
    }
    
    public int getCardCount() {
@@ -52,7 +53,7 @@ public class Hand {
           // not the position number of a card in the hand, then null
           // is returned.
       if (position >= 0 && position < hand.size())
-         return (Card)hand.elementAt(position);
+         return (Card)hand.get(position);
       else
          return null;
    }
@@ -61,20 +62,20 @@ public class Hand {
          // Sorts the cards in the hand so that cards of the same suit are
          // grouped together, and within a suit the cards are sorted by value.
          // Note that aces are considered to have the lowest value, 1.
-      Vector newHand = new Vector();
+      ArrayList newHand = new ArrayList();
       while (hand.size() > 0) {
          int pos = 0;  // Position of minimal card.
-         Card c = (Card)hand.elementAt(0);  // Minumal card.
+         Card c = (Card)hand.get(0);  // Minumal card.
          for (int i = 1; i < hand.size(); i++) {
-            Card c1 = (Card)hand.elementAt(i);
+            Card c1 = (Card)hand.get(i);
             if ( c1.getSuit() < c.getSuit() ||
                     (c1.getSuit() == c.getSuit() && c1.getValue() < c.getValue()) ) {
                 pos = i;
                 c = c1;
             }
          }
-         hand.removeElementAt(pos);
-         newHand.addElement(c);
+         hand.remove(pos);
+         newHand.add(c);
       }
       hand = newHand;
    }
@@ -83,20 +84,20 @@ public class Hand {
          // Sorts the cards in the hand so that cards of the same value are
          // grouped together.  Cards with the same value are sorted by suit.
          // Note that aces are considered to have the lowest value, 1.
-      Vector newHand = new Vector();
+      ArrayList newHand = new ArrayList();
       while (hand.size() > 0) {
          int pos = 0;  // Position of minimal card.
-         Card c = (Card)hand.elementAt(0);  // Minumal card.
+         Card c = (Card)hand.get(0);  // Minumal card.
          for (int i = 1; i < hand.size(); i++) {
-            Card c1 = (Card)hand.elementAt(i);
+            Card c1 = (Card)hand.get(i);
             if ( c1.getValue() < c.getValue() ||
                     (c1.getValue() == c.getValue() && c1.getSuit() < c.getSuit()) ) {
                 pos = i;
                 c = c1;
             }
          }
-         hand.removeElementAt(pos);
-         newHand.addElement(c);
+         hand.remove(pos);
+         newHand.add(c);
       }
       hand = newHand;
    }
