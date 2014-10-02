@@ -26,13 +26,14 @@ public class HandTest {
     }
     
     //Test adding a mock card to a deck - hand should contain 1 card afterwards
-    //Not sure how to test this without calling on the count method as well
     @Test
     public void testAddCard(){
-        Hand hand = new Hand();
+        Hand hand = mock(Hand.class);
+        when(hand.getCardCount()).thenReturn(1);
         Card dummy = mock(Card.class);
         hand.addCard(dummy);
         hand.addCard(null);
+        verify(hand).addCard(dummy);
         Assert.assertEquals(hand.getCardCount(),1);
     }
     
