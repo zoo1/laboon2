@@ -63,14 +63,62 @@ public class HandTest {
         Assert.assertEquals(hand.getCardCount(), 0);
     }
     
+    //Testing getCard method, adding 2 dummy cards testing them against each other and then against themselves
     @Test
     public void testGetCard(){
+        Hand hand = new Hand();
+        Card dummy1 = mock(Card.class);
+        Card dummy2 = mock(Card.class);
+        hand.addCard(dummy1);
+        hand.addCard(dummy2);
+        Assert.assertNotSame(dummy1, hand.getCard(1));
+        Assert.assertNotSame(dummy2, hand.getCard(0));
+        Assert.assertEquals(hand.getCard(0), dummy1);
+        Assert.assertEquals(hand.getCard(1), dummy2);
         
     }
     
     @Test
     public void testSortBySuit(){
-        
+        int spade = 0;
+        int heart = 1;
+        int diamond = 2;
+        int club = 3;
+        int[] suits = {spade,heart,diamond,club};
+        Hand hand = new Hand();
+        Card spade1 = mock(Card.class);
+        when(spade1.getSuit()).thenReturn(spade);
+        Card spade2 = spade1;
+        hand.addCard(spade1);
+        Card heart1 = mock(Card.class);
+        when(heart1.getSuit()).thenReturn(heart);
+        Card heart2 = heart1;
+        hand.addCard(heart1);
+        Card diamond1 = mock(Card.class);
+        when(diamond1.getSuit()).thenReturn(diamond);
+        Card diamond2 = diamond1;
+        hand.addCard(diamond1);
+        Card club1 = mock(Card.class);
+        when(club1.getSuit()).thenReturn(club);
+        Card club2 = club1;
+        hand.addCard(club1);
+        hand.addCard(spade2);
+        hand.addCard(heart2);
+        hand.addCard(diamond2);
+        hand.addCard(club2);
+        for(int i = 0; i<suits.length;i++){//assert suits are in spade,heart,diamond,club * 2 order
+            Assert.assertEquals(suits[i], hand.getCard(i).getSuit());
+            Assert.assertEquals(suits[i], hand.getCard(i+4).getSuit());
+        }//now sort them
+        hand.sortBySuit();
+        int j = 0;
+        for(int i = 0; i<hand.getCardCount();i++){
+            if(i%2!=0){
+                j = j-1;
+            }
+            Assert.assertEquals(hand.getCard(i).getSuit(), suits[j]);
+            j++;
+        }
     }
     
     @Test
