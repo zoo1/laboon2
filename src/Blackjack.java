@@ -90,7 +90,7 @@ import java.util.Scanner;
                return false;
           }
 
-          if (userHand.getBlackjackValue() == 21) {
+          if (userHand.isBlackjack(userHand)) {
                System.out.println("Dealer has the " + dealerHand.getCard(0)
                                        + " and the " + dealerHand.getCard(1) + ".");
                System.out.println("User has the " + userHand.getCard(0)
@@ -165,7 +165,10 @@ import java.util.Scanner;
           System.out.println("Dealer's cards are");
           System.out.println("    " + dealerHand.getCard(0));
           System.out.println("    " + dealerHand.getCard(1));
-          while (dealerHand.getBlackjackValue() <= 16) {
+          if(dealerHand.isBlackjack(dealerHand)){
+              System.out.println("Dealer got Blackjack!");
+          }
+          while (dealerHand.getBlackjackValue() <= 16  && !dealerHand.isBlackjack(dealerHand)) {
              Card newCard = deck.dealCard();
              System.out.println("Dealer hits and gets the " + newCard);
              dealerHand.addCard(newCard);

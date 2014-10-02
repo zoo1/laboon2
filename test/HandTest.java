@@ -38,7 +38,7 @@ public class HandTest {
     
     //Testing card removal, will add 10 mock cards to the hand and test that removing them 1 by 1 works
     @Test
-    public void testRemoveCard(){
+    public void testRemoveCardCard(){
         Hand hand = new Hand();
         Card dummy = mock(Card.class);
         for(int i=0;i<=10;i++){
@@ -48,6 +48,19 @@ public class HandTest {
             hand.removeCard(dummy);
             Assert.assertEquals(hand.getCardCount(), (10-j));
         }
+    }
+    
+    //testing removal of card by position rather than by object
+    //create hand of 10 cards and remove 1 - will count 9
+    @Test
+    public void testRemoveCardPosition(){
+        Hand hand = new Hand();
+        Card dummy = mock(Card.class);
+        for(int i=0;i<10;i++){
+            hand.addCard(dummy);
+        }
+        hand.removeCard(6);
+        Assert.assertEquals(hand.getCardCount(), 9);
     }
     
     //Test to see when 10 cards are added if the clear function removes them all
@@ -67,6 +80,7 @@ public class HandTest {
     @Test
     public void testGetCard(){
         Hand hand = new Hand();
+        Assert.assertNull(hand.getCard(1));
         Card dummy1 = mock(Card.class);
         Card dummy2 = mock(Card.class);
         hand.addCard(dummy1);
@@ -78,6 +92,8 @@ public class HandTest {
         
     }
     
+    //Create 2cards of each suit and place them in a hand in alternating fashion,
+    //sort the hand and test that both cards of a single suit are next to each other
     @Test
     public void testSortBySuit(){
         int spade = 0;
@@ -121,9 +137,31 @@ public class HandTest {
         }
     }
     
+    //Testing sort by value, will add cards in order 9, 2, ace, king, 7
+    //expect to see them ace,2,7,9 and king {1,2,7,9,13}
     @Test
     public void testSortByValue(){
-        
+        Hand hand = new Hand();
+        int[] expectedValues = {1,2,7,9,13};
+        Card nine = mock(Card.class);
+        when(nine.getValue()).thenReturn(9);
+        hand.addCard(nine);
+        Card two = mock(Card.class);
+        when(two.getValue()).thenReturn(2);
+        hand.addCard(two);
+        Card ace = mock(Card.class);
+        when(ace.getValue()).thenReturn(1);
+        hand.addCard(ace);
+        Card king = mock(Card.class);
+        when(king.getValue()).thenReturn(13);
+        hand.addCard(king);
+        Card seven = mock(Card.class);
+        when(seven.getValue()).thenReturn(7);
+        hand.addCard(seven);
+        hand.sortByValue();
+        for(int i = 0; i<expectedValues.length;i++){
+            Assert.assertEquals(hand.getCard(i).getValue(), expectedValues[i]);
+        }
     }
     
     

@@ -47,6 +47,15 @@ public class BlackjackHand extends Hand {
           return val;
 
      }  // end getBlackjackValue()
- 
+     
+     public boolean isBlackjack(BlackjackHand hand){
+         boolean toReturn = false;
+         hand.getBlackjackValue();
+         if(hand.getCardCount() == 2 && hand.getBlackjackValue() == 21){
+             toReturn = true;
+         }
+         return toReturn;
+     }
+
 } // end class BlackjackHand
 
